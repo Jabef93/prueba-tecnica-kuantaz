@@ -2,7 +2,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 from app.config import config
-from app.routes import Instituciones
 
 db = SQLAlchemy()
 
@@ -14,6 +13,11 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(config['development'])
     db.init_app(app)
+
+    from .models import Instituciones, Proyectos, Usuarios
+
+    with app.app_context():
+        db.create_all()
     return app
 
 

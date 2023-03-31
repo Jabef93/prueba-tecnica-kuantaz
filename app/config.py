@@ -9,7 +9,7 @@ class Config:
         port=config('PGSQL_PORT'),
         user=config('PGSQL_USER'),
         password=config('PGSQL_PASSWORD'),
-        database=config('PGSQL_DATABASE'),
+        database=config('PGSQL_DATABASE')
     )
 
 
