@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from models.Instituciones import InstitucionesModel
+from app.models.Instituciones import InstitucionesModel
 
 main = Blueprint('instituciones', __name__)
 

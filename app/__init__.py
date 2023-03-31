@@ -1,17 +1,25 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
-from config import config
-from routes import Instituciones
+from app.config import config
+from app.routes import Instituciones
 
-app = Flask(__name__)
-
+db = SQLAlchemy()
 
 def page_not_found(error):
     return "<h1>Page Not Found</h1>", 404
 
 
-if __name__ == '__main__':
+def create_app():
+    app = Flask(__name__)
     app.config.from_object(config['development'])
+    db.init_app(app)
+    return app
+
+
+""" if __name__ == '__main__':
+    app.config.from_object(config['development'])
+    
 
     # blueprints
     app.register_blueprint(Instituciones.main, url_prefix='/api/instituciones/list')
@@ -19,3 +27,4 @@ if __name__ == '__main__':
     # error handling
     app.register_error_handler(404, page_not_found)
     app.run()
+ """
