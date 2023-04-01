@@ -8,6 +8,7 @@ class Instituciones(db.Model):
     descripcion = db.Column(db.String(255))
     direccion = db.Column(db.String(255))
     fecha_de_creacion = db.Column(db.Date)
+    proyectos = db.relationship('Proyectos', backref='institucion', lazy=True)
 
 
 class Proyectos(db.Model):
@@ -16,6 +17,8 @@ class Proyectos(db.Model):
     descripcion = db.Column(db.String(255))
     fecha_inicio = db.Column(db.Date)
     fecha_termino = db.Column(db.Date)
+    institucion_id = db.Column(db.Integer, db.ForeignKey('instituciones.id'), nullable=True)
+    usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=True)
 
 
 class Usuarios(db.Model):
@@ -26,6 +29,7 @@ class Usuarios(db.Model):
     fecha_de_nacimiento = db.Column(db.Date)
     cargo = db.Column(db.String(60), nullable=False)
     edad = db.Column(db.Integer)
+    proyectos = db.relationship('Proyectos', backref='usuario_responsable', lazy=True)
 
     """ id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
