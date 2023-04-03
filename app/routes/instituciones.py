@@ -63,3 +63,16 @@ def instituciones_delete(institucion_id):
         except Exception as error:
             return jsonify({"message": str(error)}), 500            
     return jsonify(405)
+
+@instituciones.route('/list/maps', methods=['GET'])
+def instituciones_list_maps():
+    if request.method == 'GET':
+        try:
+            instance = db.session.execute(db.select(Instituciones).order_by(Instituciones.id)).scalars()
+            instance = instance.fetchall()
+            for institucion in instance:
+                institucion.link_google_maps_direccion()
+            return jsonify(instance)
+        except Exception as error:
+            return jsonify({"message": str(error)}), 500
+    return jsonify(405)

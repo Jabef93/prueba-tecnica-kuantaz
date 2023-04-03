@@ -1,8 +1,11 @@
 from app import db
 from datetime import date
 from dataclasses import dataclass
+from requests.utils import requote_uri
 from sqlalchemy.orm import Mapped
 
+
+GOOGLE_MAPS_SEARCH_BASE_URL = 'https://www.google.com/maps/search/'
 
 @dataclass
 class Proyectos(db.Model):
@@ -38,6 +41,9 @@ class Instituciones(db.Model):
     direccion = db.Column(db.String(255))
     fecha_de_creacion = db.Column(db.Date)
     proyectos = db.relationship('Proyectos', backref='institucion', lazy=True)
+
+    def link_google_maps_direccion(self):
+        self.direccion = requote_uri(f'{GOOGLE_MAPS_SEARCH_BASE_URL}{self.direccion}{self.nombre[0:3]}')
 
 
 @dataclass
