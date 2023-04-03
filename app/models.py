@@ -3,6 +3,7 @@ from datetime import date
 from dataclasses import dataclass
 from requests.utils import requote_uri
 from sqlalchemy.orm import Mapped
+from typing import Optional, ClassVar
 
 
 GOOGLE_MAPS_SEARCH_BASE_URL = 'https://www.google.com/maps/search/'
@@ -16,6 +17,7 @@ class Proyectos(db.Model):
     fecha_termino: date
     institucion_id: int
     usuario_id: int
+    dias_para_termino: ClassVar[Optional[int]]
 
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(120), unique=True, nullable=False)
@@ -24,6 +26,14 @@ class Proyectos(db.Model):
     fecha_termino = db.Column(db.Date)
     institucion_id = db.Column(db.Integer, db.ForeignKey('instituciones.id'), nullable=True)
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=True)
+
+    def get_dias_termino_proyecto(self):
+        diferencia_de_dias = (self.fecha_termino - date.today()).days
+        response = {
+            "nombre": self.nombre,
+            "dias_para_termino": diferencia_de_dias if (diferencia_de_dias > 0) else 0
+        }
+        return response
 
 
 @dataclass
