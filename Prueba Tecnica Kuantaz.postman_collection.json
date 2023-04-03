@@ -1,0 +1,295 @@
+{
+	"info": {
+		"_postman_id": "dbb83808-db57-421c-8370-71b6e8ff1b5b",
+		"name": "Prueba Tecnica Kuantaz",
+		"description": "API Rest para las entidades Instituciones, Proyectos y Usuarios",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22347790"
+	},
+	"item": [
+		{
+			"name": "Instituciones",
+			"item": [
+				{
+					"name": "CreateInstitucion",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"institucion test\",\r\n    \"descripcion\": \"test crecion de una institucion\",\r\n    \"direccion\": \"avenida siempre viva 742\",\r\n    \"fecha_de_creacion\": \"2023-04-03\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/instituciones/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"instituciones",
+								"create"
+							]
+						},
+						"description": "Permite la creación de una Institución al entregar en el body sus parametros respectivos en formato JSON. Al ser la `id` autoincremental no es necesario colocarla explicitamente."
+					},
+					"response": []
+				},
+				{
+					"name": "GetInstitucionesList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/instituciones/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"instituciones",
+								"list"
+							]
+						},
+						"description": "Retorna una lista con todas las instituciones"
+					},
+					"response": []
+				},
+				{
+					"name": "GetInstitucion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/instituciones/get/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"instituciones",
+								"get",
+								"1"
+							]
+						},
+						"description": "Retorna una institucion en especifico al entregar el parametro `id` en la URL."
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateInstitucion",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"test put\",\r\n    \"descripcion\": \"test update con put\",\r\n    \"direccion\": \"put123\",\r\n    \"fecha_de_creacion\": \"2023-02-15\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/instituciones/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"instituciones",
+								"update",
+								"1"
+							]
+						},
+						"description": "Actualiza una institucion al entregar su `id` correspondiente y el body con los cambios."
+					},
+					"response": []
+				},
+				{
+					"name": "PartiallyUpdateInstitucion",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"patch test\",\r\n    \"fecha_de_creacion\": \"2023-02-15\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/instituciones/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"instituciones",
+								"update",
+								"1"
+							]
+						},
+						"description": "Actualiza parcialmente una institucion al entregar su `id` correspondiente y el body con los cambios."
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteInstitucion",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/instituciones/delete/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"instituciones",
+								"delete",
+								"6"
+							]
+						},
+						"description": "Elimina una institucion al entregar su `id` correspondiente."
+					},
+					"response": []
+				},
+				{
+					"name": "ListMapInstituciones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/instituciones/list/maps",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"instituciones",
+								"list",
+								"maps"
+							]
+						},
+						"description": "Retorna una lista con todas las instituciones, pero con las direcciones modificadas a su busqueda correspondiente en google maps."
+					},
+					"response": []
+				}
+			],
+			"description": "Entidad con los siguientes atributos:\n\n*   id: serial4\n*   nombre: varchar\n*   descripcion: varchar\n*   direccion: varchar\n*   fecha_de_creacion: date\n    \n\nA esta entidad se le pueden realizar las operaciones sobre información almacenada CRUD."
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "GetUsuariosList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/usuarios/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"usuarios",
+								"list"
+							]
+						},
+						"description": "Retorna una lista con todas los usuarios."
+					},
+					"response": []
+				},
+				{
+					"name": "GetUsuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/usuarios/get/11111111-1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"usuarios",
+								"get",
+								"11111111-1"
+							]
+						},
+						"description": "Retorna una institucion en especifico al entregar el parametro `rut` en la URL."
+					},
+					"response": []
+				}
+			],
+			"description": "Entidad con los siguientes atributos:\n\n*   id: serial4\n*   nombre: varchar\n*   apellidos: varchar\n*   rut: varchar\n*   fecha_de_nacimiento: date\n*   cargo: varchar\n*   edad: int"
+		},
+		{
+			"name": "Proyectos",
+			"item": [
+				{
+					"name": "GetProyectosList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/proyectos/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"proyectos",
+								"list"
+							]
+						},
+						"description": "Retorna una lista con todas los proyectos."
+					},
+					"response": []
+				},
+				{
+					"name": "ListProyectosDiasTermino",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/proyectos/list/days",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"proyectos",
+								"list",
+								"days"
+							]
+						},
+						"description": "Retorna una lista de todos los proyectos con su nombre y el numero de días para que finalice."
+					},
+					"response": []
+				}
+			],
+			"description": "Entidad con los siguientes atributos:\n\n*   id: serial4\n*   nombre: varchar\n*   descripcion: varchar\n*   fecha_inicio: date\n*   fecha_termino: date"
+		}
+	]
+}
