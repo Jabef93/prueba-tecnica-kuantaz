@@ -34,7 +34,7 @@ def instituciones_create():
                 instance = Instituciones(**request.json)
                 db.session.add(instance)
                 db.session.commit()
-                return jsonify({"message": "Created"}), 200
+                return jsonify({"message": "Created"}), 201
         except Exception as error:
             return jsonify({"message": str(error)}), 500
     return jsonify(405)
@@ -44,9 +44,9 @@ def instituciones_create():
 def instituciones_update(institucion_id):
     if request.method in ['PUT', 'PATCH']:
         try:
-            instance = db.session.query(Instituciones).filter_by(id=institucion_id).update(dict(**request.json))
+            db.session.query(Instituciones).filter_by(id=institucion_id).update(dict(**request.json))
             db.session.commit()
-            return jsonify(instance)
+            return jsonify({"message": "Updated"}), 200
         except Exception as error:
             return jsonify({"message": str(error)}), 500
     return jsonify(405)
@@ -59,7 +59,7 @@ def instituciones_delete(institucion_id):
             instance = db.get_or_404(Instituciones, institucion_id)
             db.session.delete(instance)
             db.session.commit()
-            return jsonify(instance)
+            return jsonify({"message": "Deleted"})
         except Exception as error:
             return jsonify({"message": str(error)}), 500            
     return jsonify(405)
