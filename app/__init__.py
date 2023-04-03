@@ -20,6 +20,10 @@ def create_app():
         db.create_all()
 
     from app.routes.instituciones import instituciones
+    from app.routes.usuarios import usuarios
+    from app.routes.proyectos import proyectos
     app.register_blueprint(instituciones)
+    app.register_blueprint(usuarios)
+    app.register_blueprint(proyectos)
     
     return app
