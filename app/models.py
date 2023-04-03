@@ -1,8 +1,16 @@
 from app import db
 from datetime import date
+from dataclasses import dataclass
 
 
+@dataclass
 class Instituciones(db.Model):
+    id: int
+    nombre: str
+    descripcion: str
+    direccion: str
+    fecha_de_creacion: date
+
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(120), unique=True, nullable=False)
     descripcion = db.Column(db.String(255))
@@ -11,7 +19,16 @@ class Instituciones(db.Model):
     proyectos = db.relationship('Proyectos', backref='institucion', lazy=True)
 
 
+@dataclass
 class Proyectos(db.Model):
+    id: int
+    nombre: str
+    descripcion: str
+    fecha_inicio: date
+    fecha_termino: date
+    institucion_id: int
+    usuario_id: int
+
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(120), unique=True, nullable=False)
     descripcion = db.Column(db.String(255))
@@ -21,7 +38,16 @@ class Proyectos(db.Model):
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=True)
 
 
+@dataclass
 class Usuarios(db.Model):
+    id: int
+    nombre: str
+    apellidos: str
+    rut: str
+    fecha_de_nacimiento: date
+    cargo: str
+    edad: int
+
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(120), nullable=False)
     apellidos = db.Column(db.String(120), nullable=False)
@@ -30,10 +56,3 @@ class Usuarios(db.Model):
     cargo = db.Column(db.String(60), nullable=False)
     edad = db.Column(db.Integer)
     proyectos = db.relationship('Proyectos', backref='usuario_responsable', lazy=True)
-
-    """ id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
-    password = db.Column(db.String(60), nullable=False)
-    posts = db.relationship('Post', backref='author', lazy=True) """

@@ -18,17 +18,8 @@ def create_app():
 
     with app.app_context():
         db.create_all()
-    return app
 
-
-""" if __name__ == '__main__':
-    app.config.from_object(config['development'])
+    from app.routes.instituciones import instituciones
+    app.register_blueprint(instituciones)
     
-
-    # blueprints
-    app.register_blueprint(Instituciones.main, url_prefix='/api/instituciones/list')
-
-    # error handling
-    app.register_error_handler(404, page_not_found)
-    app.run()
- """
+    return app
