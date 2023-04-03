@@ -1,22 +1,7 @@
 from app import db
 from datetime import date
 from dataclasses import dataclass
-
-
-@dataclass
-class Instituciones(db.Model):
-    id: int
-    nombre: str
-    descripcion: str
-    direccion: str
-    fecha_de_creacion: date
-
-    id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(120), unique=True, nullable=False)
-    descripcion = db.Column(db.String(255))
-    direccion = db.Column(db.String(255))
-    fecha_de_creacion = db.Column(db.Date)
-    proyectos = db.relationship('Proyectos', backref='institucion', lazy=True)
+from sqlalchemy.orm import Mapped
 
 
 @dataclass
@@ -39,6 +24,23 @@ class Proyectos(db.Model):
 
 
 @dataclass
+class Instituciones(db.Model):
+    id: int
+    nombre: str
+    descripcion: str
+    direccion: str
+    fecha_de_creacion: date
+    proyectos: Mapped[Proyectos]
+
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(120), unique=True, nullable=False)
+    descripcion = db.Column(db.String(255))
+    direccion = db.Column(db.String(255))
+    fecha_de_creacion = db.Column(db.Date)
+    proyectos = db.relationship('Proyectos', backref='institucion', lazy=True)
+
+
+@dataclass
 class Usuarios(db.Model):
     id: int
     nombre: str
@@ -47,6 +49,7 @@ class Usuarios(db.Model):
     fecha_de_nacimiento: date
     cargo: str
     edad: int
+    proyectos: Mapped[Proyectos]
 
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(120), nullable=False)

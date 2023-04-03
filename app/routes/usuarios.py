@@ -14,3 +14,14 @@ def usuarios_list():
         except Exception as error:
             return jsonify({"message": str(error)}), 500
     return jsonify(405)
+
+
+@usuarios.route('/get/<string:usuario_rut>', methods=['GET'])
+def usuarios_get(usuario_rut):
+    if request.method == 'GET':
+        try:
+            instance = db.session.query(Usuarios).filter_by(rut=usuario_rut).first_or_404()
+            return jsonify(instance)
+        except Exception as error:
+            return jsonify({"message": str(error)}), 500
+    return jsonify(405)
