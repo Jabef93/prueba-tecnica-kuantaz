@@ -13,7 +13,7 @@ def usuarios_list():
             return jsonify(instance.fetchall())
         except Exception as error:
             return jsonify({"message": str(error)}), 500
-    return jsonify(405)
+    return jsonify({"message": "Method Not Allowed"}), 405
 
 
 @usuarios.route('/get/<string:usuario_rut>', methods=['GET'])
@@ -24,4 +24,4 @@ def usuarios_get(usuario_rut):
             return jsonify(instance)
         except Exception as error:
             return jsonify({"message": str(error)}), 500
-    return jsonify(405)
+    return jsonify({"message": "Method Not Allowed"}), 405

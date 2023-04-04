@@ -13,7 +13,7 @@ def instituciones_list():
             return jsonify(instance.fetchall())
         except Exception as error:
             return jsonify({"message": str(error)}), 500
-    return jsonify(405)
+    return jsonify({"message": "Method Not Allowed"}), 405
 
 
 @instituciones.route('/get/<int:institucion_id>', methods=['GET'])
@@ -24,7 +24,7 @@ def instituciones_get(institucion_id):
             return jsonify(instance)
         except Exception as error:
             return jsonify({"message": str(error)}), 500
-    return jsonify(405)        
+    return jsonify({"message": "Method Not Allowed"}), 405
 
 
 @instituciones.route('/create', methods=['POST'])
@@ -37,7 +37,7 @@ def instituciones_create():
                 return jsonify({"message": "Created"}), 201
         except Exception as error:
             return jsonify({"message": str(error)}), 500
-    return jsonify(405)
+    return jsonify({"message": "Method Not Allowed"}), 405
 
 
 @instituciones.route('/update/<int:institucion_id>', methods=['PUT', 'PATCH'])
@@ -49,7 +49,7 @@ def instituciones_update(institucion_id):
             return jsonify({"message": "Updated"}), 200
         except Exception as error:
             return jsonify({"message": str(error)}), 500
-    return jsonify(405)
+    return jsonify({"message": "Method Not Allowed"}), 405
 
 
 @instituciones.route('/delete/<int:institucion_id>', methods=['DELETE'])
@@ -62,7 +62,7 @@ def instituciones_delete(institucion_id):
             return jsonify({"message": "Deleted"})
         except Exception as error:
             return jsonify({"message": str(error)}), 500            
-    return jsonify(405)
+    return jsonify({"message": "Method Not Allowed"}), 405
 
 @instituciones.route('/list/maps', methods=['GET'])
 def instituciones_list_maps():
@@ -75,4 +75,4 @@ def instituciones_list_maps():
             return jsonify(instance)
         except Exception as error:
             return jsonify({"message": str(error)}), 500
-    return jsonify(405)
+    return jsonify({"message": "Method Not Allowed"}), 405

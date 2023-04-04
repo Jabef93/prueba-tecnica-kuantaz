@@ -13,7 +13,7 @@ def proyectos_list():
             return jsonify(instance.fetchall())
         except Exception as error:
             return jsonify({"message": str(error)}), 500
-    return jsonify(405)
+    return jsonify({"message": "Method Not Allowed"}), 405
 
 @proyectos.route('/list/days', methods=['GET'])
 def proyectos_list_days():
@@ -26,4 +26,4 @@ def proyectos_list_days():
             return jsonify(x)
         except Exception as error:
             return jsonify({"message": str(error)}), 500
-    return jsonify(405)
+    return jsonify({"message": "Method Not Allowed"}), 405
